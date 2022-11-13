@@ -5,17 +5,17 @@ const Category = require("../category")
 const db = require('../../config/mongoose')
 
 const categorySeeders = [
-  { name: "家居物業", icon: "https://fontawesome.com/icons/home?style=solid" },
-  { name: "交通出行", icon: "https://fontawesome.com/icons/shuttle-van?style=solid" },
-  { name: "休閒娛樂", icon: "https://fontawesome.com/icons/grin-beam?style=solid" },
-  { name: "餐飲食品", icon: "https://fontawesome.com/icons/utensils?style=solid" },
-  { name: "其他", icon: "https://fontawesome.com/icons/pen?style=solid" }
+  { name: "家居物業", icon: "fa-solid fa-house" },
+  { name: "交通出行", icon: "fa-solid fa-van-shuttle" },
+  { name: "休閒娛樂", icon: "fa-solid fa-face-grin-beam" },
+  { name: "餐飲食品", icon: "fa-solid fa-utensils" },
+  { name: "其他", icon: "fa-solid fa-pen" }
 ]
 
 db.once('open', () => {
   Category.insertMany(categorySeeders)
     .then(() => {
-      console.log('categorySeeder done')
+      console.log('categorySeeder created successfully')
       process.exit()
     })
 })
