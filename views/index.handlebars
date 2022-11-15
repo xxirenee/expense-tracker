@@ -1,9 +1,82 @@
-<ul>
-  {{#each records}}
-  <li>
-    {{this.name}}
-    {{this.date}}
-    {{this.amount}}
-  </li>
-  {{/each}}
-</ul>
+<div class="mt-5">
+  <select class="form-select mb-5" aria-label="Default select example">
+    <option selected>類別</option>
+    <option value="1">家居物業</option>
+    <option value="2">交通出行</option>
+    <option value="3">休閒娛樂</option>
+    <option value="4">餐飲食品</option>
+    <option value="5">其他</option>
+  </select>
+  <div class="d-flex justify-content-center">
+    <h4>總金額：</h4>
+    <h1 class="total-amount text-danger">25260</h1>
+  </div>
+
+
+  <ul class="list-group list-group-flush d-flex justify-content-center">
+    <li class="list-group-item list-group-item-secondary">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <div class="col-auto me-auto">
+          <div class="fw-bold category-text">晚餐</div>
+          <div class="date-text">2019/04/23</div>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-primary">修改</button>
+          <button class="btn btn-outline-secondary">刪除</button>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <i class="fa-solid fa-house"></i>
+        </div>
+        <div class="col-auto me-auto">
+          <div class="fw-bold category-text">租金</div>
+          <div class="date-text">2019/04/23</div>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-primary">修改</button>
+          <button class="btn btn-outline-secondary">刪除</button>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item list-group-item-secondary">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <i class="fa-solid fa-face-grin-beam"></i>
+        </div>
+        <div class="col-auto me-auto">
+          <div class="fw-bold category-text">電影</div>
+          <div class="date-text">2019/04/23</div>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-primary">修改</button>
+          <button class="btn btn-outline-secondary">刪除</button>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item list-group-item">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <i class="fa-solid fa-face-grin-beam"></i>
+        </div>
+        <div class="col-auto me-auto">
+          <div class="fw-bold category-text">娛樂</div>
+          <div class="date-text">2019/04/23</div>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-primary">修改</button>
+          <button class="btn btn-outline-secondary">刪除</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="row-auto text-center mt-3">
+  <a class="btn btn-warning btn-outline-secondary" href="/record/new">新增支出</a>
+</div>
