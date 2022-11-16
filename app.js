@@ -2,7 +2,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const Record = require('./models/record')
-
+const bodyParser = require('body-parser')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -14,12 +14,17 @@ const port = 3000
 
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   Record.find()
     .lean()
     .then(records => res.render('index', { records }))
     .catch(err => console.log(err))
+})
+
+app.get('/records/new', (req, res) => {
+  return res.render('new')
 })
 
 app.listen(port, () => {
