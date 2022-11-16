@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
 require('./config/mongoose')
 mongoose.connect(process.env.MONGODB_URI)
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -25,6 +25,10 @@ app.get('/', (req, res) => {
 
 app.get('/records/new', (req, res) => {
   return res.render('new')
+})
+
+app.get('/records/edit', (req, res) => {
+  return res.render('edit')
 })
 
 app.listen(port, () => {
