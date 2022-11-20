@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-4">
-          <input type="text" class="form-control" id="name" aria-describedby="name" name="name" size="4" required>
+          <input type="text" class="form-control" id="name" aria-describedby="name" name="name" size="4" value="{{record.name}}" required>
         </div>
       </div>
 
@@ -27,7 +27,7 @@
         </div>
         <div class="col-4">
           <input type="date" class="form-control p-2 flex-grow-1" id="date" aria-describedby="date" placeholder="date"
-            name="date" required>
+            name="date" value="{{record.date}}" required>
         </div>
       </div>
 
@@ -36,13 +36,11 @@
           <label for="date" class="form-label h3">類別<span class="text-danger">*</span>：</label>
         </div>
         <div class="col-4">
-          <select class="form-select" id="category">
-            <option disabled selected>類別</option>
-            <option value="1">家居物業</option>
-            <option value="2">交通出行</option>
-            <option value="3">休閒娛樂</option>
-            <option value="4">餐飲食品</option>
-            <option value="5">其他</option>
+          <select class="form-select" id="category" name="categoryId" >
+            <option value="">類別</option>
+            {{#each categories}}
+            <option value="{{this._id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
           </select>
         </div>
       </div>
@@ -53,7 +51,7 @@
         </div>
         <div class="col-4">
           <input type="number" min="0" class="form-control p-2 flex-grow-1" id="amount" aria-describedby="amount"
-            name="amount" required>
+            name="amount" value="{{record.amount}}" required>
         </div>
       </div>
 

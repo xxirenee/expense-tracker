@@ -29,8 +29,10 @@
         </div>
         <div class="col auto amount-text text-end" style="display:inline">{{ this.amount }}</div>
         <div class="col-auto">
-          <button class="btn btn-outline-primary">修改</button>
-          <button class="btn btn-outline-secondary">刪除</button>
+          <a class="btn btn-primary" href="/records/{{this._id}}/edit">修改</a>
+          <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+            <button class="btn btn-danger" type="submit">刪除</button>
+          </form>
         </div>
       </div>
     </li>
