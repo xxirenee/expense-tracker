@@ -15,6 +15,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
+    "dayjs": "^1.11.6",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
     "method-override": "^3.0.0",

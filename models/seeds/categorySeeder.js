@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 const Category = require("../category")
 const db = require('../../config/mongoose')
 
-const categorySeeders = [
+const categories = [
   { name: "家居物業", icon: "fa-solid fa-house" },
   { name: "交通出行", icon: "fa-solid fa-van-shuttle" },
   { name: "休閒娛樂", icon: "fa-solid fa-face-grin-beam" },
@@ -13,7 +13,7 @@ const categorySeeders = [
 ]
 
 db.once('open', () => {
-  Category.insertMany(categorySeeders)
+  Category.insertMany(categories)
     .then(() => {
       console.log('categorySeeder created successfully')
       process.exit()
