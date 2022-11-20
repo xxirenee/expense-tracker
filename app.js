@@ -9,7 +9,7 @@ const routes = require('./routes')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 mongoose.connect(process.env.MONGODB_URI)
 const app = express()
@@ -25,6 +25,7 @@ app.use(session({
 
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+usePassport(app)
 app.use(routes)
 
 
