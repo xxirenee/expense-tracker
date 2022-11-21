@@ -6,7 +6,7 @@ const dayjs = require('dayjs')
 
 
 router.get('/', (req, res) => {
-
+  const userId = req.user._id
   let totalAmount = 0
   const selectedCategory = []
   Category.find({})
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
           selectedCategory.push(category)
         }
       })
-      Record.find({ categoryId: selectedCategory })
+      Record.find({ userId, categoryId: selectedCategory })
         .lean()
         .populate('categoryId')
         .sort({ date: 'desc' })
