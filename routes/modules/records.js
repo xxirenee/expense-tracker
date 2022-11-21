@@ -92,12 +92,12 @@ router.put('/:id', (req, res) => {
           }
         })
 
-        return res.render('edit', { categories, record: req.body })
+        return res.render('edit', { categories, record: req.body, errors, _id })
       })
       .catch(error => console.error(error))
   }
 
-  Record.findByIdAndUpdate({ _id }, { name, date, categoryId: category, amount })
+  Record.findByIdAndUpdate({ _id, userId }, { name, date, categoryId: category, amount })
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 }
