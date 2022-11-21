@@ -37,7 +37,7 @@
       <label for="date" class="form-label h3">類別<span class="text-danger">*</span>：</label>
       </div>
       <div class ="col-4">
-      <select class="form-select" id="category" name="category" >
+      <select class="form-select" id="category" name="category" required>
         <option value="">類別</option>
         {{#each categories}}
           <option value="{{this._id}}" {{#if this.selected}}{{/if}}>{{this.name}}</option>

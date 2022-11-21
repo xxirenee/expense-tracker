@@ -8,20 +8,20 @@ const dayjs = require('dayjs')
 router.get('/', (req, res) => {
   const userId = req.user._id
   let totalAmount = 0
-  const selectedCategory = []
-  Category.find({})
+  const chooseCategory = []
+  const reqCategory = req.query.category
+  Category.find()
     .lean()
-    .sort({ _id: 'asc' })
     .then(categories => {
       categories.forEach(category => {
-        if (category._id.toString() === req.query.category) {
-          category.selected = 'selected'
-          selectedCategory.push(req.query.category)
-        } else if (!req.query.category) {
-          selectedCategory.push(category)
+        if (category._id.toString() === reqCategory) {
+          category.selected = true
+          chooseCategory.push(reqCategory)
+        } else if(!reqCategory) {
+          chooseCategory.push(category)
         }
       })
-      Record.find({ userId, categoryId: selectedCategory })
+      Record.find({ userId, categoryId: chooseCategory })
         .lean()
         .populate('categoryId')
         .sort({ date: 'desc' })
@@ -35,5 +35,4 @@ router.get('/', (req, res) => {
     })
     .catch(error => console.error(error))
 })
-
 module.exports = router

@@ -19,9 +19,9 @@ router.post('/', (req, res) => {
   const { name, date, category, amount } = req.body
   const errors = []
   if (!name || !date || !category || !amount) {
-    errors.push({ message: '所有欄位都要填！' })
+    errors.push({ message: '所有欄位必填！' })
   }
-  if (errors.length !== 0) {
+  if (errors.length) {
     return Category.find({})
       .lean()
       .then(categories => {
@@ -51,27 +51,32 @@ router.post('/', (req, res) => {
     .catch(err => console.log(err))
 })
 
+//編輯
 
 router.get('/:id/edit', (req, res) => {
   const _id = req.params.id
   const userId = req.user._id
 
-
-  Record.findOne({ _id, userId })
-    .populate('categoryId')
+  Category.find({})
+    
     .lean()
-    .then(record => {
-      record.date = record.date.toISOString().slice(0, 10)
-      Category.find({ _id: { $ne: record.categoryId._id } })
+    .then(categories => {
+      Record.findOne({ _id, userId })
         .lean()
-        .sort({ _id: 'asc' })
-        .then(categories => res.render('edit', { record, categories }))
-        .catch(error => console.error(error))
+        .populate('categoryId')
+        .then(record => {
+          record.date = dayjs(record.date).format('YYYY-MM-DD')
+          categories.forEach(category => {
+            if (categories.find(data => data._id.toString().includes(record.categoryId))) {
+              category.selected = true
+            }
+          })
+          res.render('edit', { record, categories })
+        })
     })
-    .catch(error => console.error(error))
+
 })
 
-// 編輯
 router.put('/:id', (req, res) => {
 
   const _id = req.params.id
@@ -80,9 +85,9 @@ router.put('/:id', (req, res) => {
   const { name, date, category, amount } = req.body
   const errors = []
   if (!name || !date || category === '' || !amount) {
-    errors.push({ message: '所有欄位都是必填！' })
+    errors.push({ message: '所有欄位必填！' })
   }
-  if (errors.length !== 0) {
+  if (errors.length) {
     return Category.find({})
       .lean()
       .then(categories => {
@@ -91,13 +96,12 @@ router.put('/:id', (req, res) => {
             data.selected = true
           }
         })
-
+        req.body._id = req.user._id
         return res.render('edit', { categories, record: req.body, errors, _id })
       })
       .catch(error => console.error(error))
   }
-
-  Record.findByIdAndUpdate({ _id, userId }, { name, date, categoryId: category, amount })
+  Record.findOneAndUpdate({ _id, userId }, { name, date, categoryId: category, amount })
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 }
